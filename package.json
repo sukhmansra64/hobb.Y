@@ -1,0 +1,40 @@
+{
+  "name": "hobb.y",
+  "version": "1.0.0",
+  "description": "A fullstack social networking application which connects users using their hobbies.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server",
+    "server": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sukhmansra64/hobb.Y.git"
+  },
+  "author": "Sukhman Sra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sukhmansra64/hobb.Y/issues"
+  },
+  "homepage": "https://github.com/sukhmansra64/hobb.Y#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "concurrently": "^6.2.1",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "gravatar": "^1.8.1",
+    "json-web-token": "^3.2.0",
+    "mongodb": "^4.1.0",
+    "mongoose": "^5.13.6",
+    "node": "^16.6.1",
+    "nodemon": "^2.0.12",
+    "react": "^17.0.2",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "body-parser": "^1.19.0",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
