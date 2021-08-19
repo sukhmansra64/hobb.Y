@@ -121,4 +121,38 @@ router.get('/user/:user_id',async(req,res)=>{
     }
 });
 
+//@route DELETE api/profile
+//@desc delete a user's profile, user, & posts
+//@access Private
+
+router.delete('/',auth,async (req,res)=>{
+    try{
+        //@TODO -remove users post
+
+        //check if user/profiles exist
+
+        user = await User.findById(req.user.id);
+        profile = await Profile.findOne({user: req.user.id});
+
+        if(!user){
+            return res.status(401).json({msg: 'User does not exist'});
+        }
+
+        //remove user
+        await User.findOneAndRemove({_id:req.user.id});
+
+        if(!profile){
+            return res.status(200).json({msg: 'User deleted, profile does not exist'});
+        }
+
+        //remove profile
+        await Profile.findOneAndRemove({user:req.user.id});
+
+        res.status(200).json({msg: 'User and Profile was deleted'});
+    }catch(err){
+        console.error(err);
+        res.status(500).json({msg:'Server Error'});
+    }
+});
+
 module.exports = router;
