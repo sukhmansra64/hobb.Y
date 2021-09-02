@@ -1,12 +1,12 @@
 import React from 'react';
 import {useState} from "react";
-import {Link} from "react-router-dom";
-import axios from 'axios';
+import {Link, Redirect} from "react-router-dom";
 import {connect} from "react-redux";
 import {setAlert} from "../../actions/alert";
+import {register} from "../../actions/auth";
 import propTypes from 'prop-types';
 
-function Register({setAlert}) {
+function Register({setAlert, register, isAuthenticated}) {
     const [formData, setFormData] = useState({
             name: '',
             email: '',
@@ -25,12 +25,14 @@ function Register({setAlert}) {
         }else{
             const newUser = {name, email, password};
             try{
-                const res = await axios.post('/api/users',JSON.stringify(newUser),{headers:{'Content-Type':'application/json'}});
-                console.log(res.data);
+                register(newUser);
             }catch(err){
                 console.log(err.response.data)
             }
         }
+    }
+    if(isAuthenticated){
+        //return <Redirect to='/dashboard'/>
     }
 
     return (
@@ -76,7 +78,14 @@ function Register({setAlert}) {
 }
 
 Register.propTypes={
-    setAlert: propTypes.func.isRequired
+    setAlert: propTypes.func.isRequired,
+    register: propTypes.func.isRequired,
+    isAuthenticated: propTypes.bool
 }
 
-export default connect(null,{setAlert})(Register);
+const mapStateToProps = (state) => ({
+    isAuthenticated: state.auth.isAuthenticated
+});
+
+
+export default connect(mapStateToProps,{setAlert, register})(Register);

@@ -7,8 +7,15 @@ import Login from "./Components/auth/Login";
 import Register from "./Components/auth/Register";
 import store from "./store";
 import Alert from "./Components/layout/Alert";
+import {useEffect} from "react";
+import setAuthToken from "./utils/setAuthToken";
+import {loadUser} from "./actions/auth";
 
 function App() {
+    useEffect(()=>{
+        setAuthToken(localStorage.getItem('token'));
+        store.dispatch(loadUser());
+    },[])
   return (
       <Provider store={store}>
           <Router>
