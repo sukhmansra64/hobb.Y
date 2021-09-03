@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
-import axios from "axios";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import { login } from '../../actions/auth';
+import propTypes from 'prop-types';
 
 
-function Login() {
+function Login({login,isAuthenticated}) {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -15,19 +17,13 @@ function Login() {
     }
     const onSubmit = async (e) =>{
         e.preventDefault();
-            const user = {email, password};
-            try{
-                const res = await axios.post('/api/auth',JSON.stringify(user),{headers:{'Content-Type':'application/json'}});
-                console.log(res.data);
-            }catch(err){
-                console.log(err.response.data)
-            }
+        login(email,password)
         }
 
     return (
         <>
-            <h1 className="large text-primary">Sign Up</h1>
-            <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
+            <h1 className="large text-primary">Sign In</h1>
+            <p className="lead"><i className="fas fa-user"></i> Sign into Your Account</p>
             <form className="form" onSubmit={onSubmit}>
                 <div className="form-group">
                     <input type="email" placeholder="Email Address" name="email" onChange={onChange}/>
@@ -54,4 +50,13 @@ function Login() {
     );
 }
 
-export default Login;
+Login.propTypes = {
+    login: propTypes.func.isRequired,
+    isAuthenticated: propTypes.bool
+}
+
+const mapStateToProps = (state) =>{
+    return {isAuthenticated: state.auth.isAuthenticated}
+}
+
+export default connect(mapStateToProps,{login})(Login);
