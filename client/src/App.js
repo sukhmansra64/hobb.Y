@@ -5,6 +5,8 @@ import Navbar from "./Components/layout/Navbar";
 import Landing from "./Components/layout/Landing";
 import Login from "./Components/auth/Login";
 import Register from "./Components/auth/Register";
+import PrivateRoute from "./Components/routing/PrivateRoute";
+import Dashboard from "./Components/dashboard/Dashboard";
 import store from "./store";
 import Alert from "./Components/layout/Alert";
 import {useEffect} from "react";
@@ -33,6 +35,7 @@ function App() {
                           <Route exact path='/register'>
                               <Register/>
                           </Route>
+                          <PrivateRoute component={Dashboard}/>
                       </Switch>
                   </section>
               </>
