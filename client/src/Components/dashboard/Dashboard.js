@@ -1,50 +1,30 @@
-import React from 'react';
+
+import React,{useEffect} from 'react';
 import {connect} from "react-redux";
 import {Redirect} from 'react-router-dom'
 import PropTypes from 'prop-types';
+import {getCurrentProfile} from '../../actions/profile';
 
 Dashboard.propTypes = {
-    user: PropTypes.object,
-    isAuthenticated: PropTypes.bool.isRequired
+    getCurrentProfile: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    profile: PropTypes.object.isRequired
 };
 
 
-function Dashboard({isAuthenticated, user}) {
-    const getUserName = () =>{
-        if (user){
-           return(user.name);
-        }
-    }
-    if(!isAuthenticated) return(<Redirect to='/login'/>)
+function Dashboard({auth, profile, getCurrentProfile}) {
+    useEffect(()=>{getCurrentProfile()},[])
+    if(!auth.isAuthenticated) return(<Redirect to='/login'/>)
     return (
-        <section className="container">
-            <h1 className="large text-primary">
-                Dashboard
-            </h1>
-            <p className="lead"><i className="fas fa-user"></i> Welcome {getUserName()}</p>
-            <div className="dash-buttons">
-                <a href="create-profile.html" className="btn btn-light"
-                ><i className="fas fa-user-circle text-primary"></i> Edit Profile</a
-                >
-
-            </div>
-
-            <div className="my-2">
-                <button className="btn btn-danger">
-                    <i className="fas fa-user-minus"></i>
-
-                    Delete My Account
-                </button>
-            </div>
-        </section>
+        <div>Dashboard</div>
     );
 }
 
-const mapStateToProps = (state) => ({
-    user: state.auth.user,
-    isAuthenticated: state.auth.isAuthenticated
+const mapStateToProps = state => ({
+    auth: state.auth,
+    profile: state.profile
 });
 
 
 
-export default connect(mapStateToProps)(Dashboard);
+export default connect(mapStateToProps, {getCurrentProfile})(Dashboard);
