@@ -23,12 +23,12 @@ function App() {
           <Router>
               <>
                   <Navbar/>
-                  <Route exact path='/'>
-                      <Landing/>
-                  </Route>
-                  <section className='container'>
-                      <Alert/>
-                      <Switch>
+                  <Switch>
+                      <Route exact path='/'>
+                          <Landing/>
+                      </Route>
+                      <section className='container'>
+                          <Alert/>
                           <Route exact path='/login'>
                               <Login/>
                           </Route>
@@ -36,8 +36,8 @@ function App() {
                               <Register/>
                           </Route>
                           <PrivateRoute component={Dashboard}/>
-                      </Switch>
-                  </section>
+                      </section>
+                  </Switch>
               </>
           </Router>
       </Provider>
