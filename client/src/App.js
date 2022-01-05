@@ -12,6 +12,8 @@ import Alert from "./Components/layout/Alert";
 import {useEffect} from "react";
 import setAuthToken from "./utils/setAuthToken";
 import {loadUser} from "./actions/auth";
+import CreateProfile from "./Components/ProfileForms/CreateProfile";
+import EditProfile from "./Components/ProfileForms/EditProfile";
 
 function App() {
     useEffect(()=>{
@@ -35,7 +37,15 @@ function App() {
                           <Route exact path='/register'>
                               <Register/>
                           </Route>
-                          <PrivateRoute component={Dashboard}/>
+                          <Route exact path='/dashboard'>
+                            <PrivateRoute component={Dashboard}/>
+                          </Route>
+                          <Route exact path='/create-profile'>
+                              <PrivateRoute component={CreateProfile}/>
+                          </Route>
+                          <Route exact path='/edit-profile'>
+                              <PrivateRoute component={EditProfile}/>
+                          </Route>
                       </section>
                   </Switch>
               </>

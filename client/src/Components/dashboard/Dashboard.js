@@ -2,17 +2,19 @@ import React,{useEffect} from 'react';
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types';
-import {getCurrentProfile} from '../../actions/profile';
+import {getCurrentProfile, deleteProfile} from '../../actions/profile';
 import Spinner from '../layout/Spinner';
+import DashboardActions from "./DashboardActions";
 
 Dashboard.propTypes = {
     getCurrentProfile: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
-    profile: PropTypes.object.isRequired
+    profile: PropTypes.object.isRequired,
+    deleteProfile: PropTypes.func.isRequired
 };
 
 
-function Dashboard({auth:{user}, profile:{profile,loading}, getCurrentProfile}) {
+function Dashboard({auth:{user}, profile:{profile,loading}, getCurrentProfile, deleteProfile}) {
     useEffect(()=>{getCurrentProfile()},[]);
     return loading && profile === null ? (
         <Spinner/>
@@ -24,11 +26,25 @@ function Dashboard({auth:{user}, profile:{profile,loading}, getCurrentProfile}) 
             </p>
             {
                 profile !== null ? (
-                    <>Has profile</>
+                    <>
+                        <DashboardActions/>
+                        <div className='my-2' onClick={()=>{deleteProfile()}}>
+                            <button className='btn btn-danger' >
+                                <i className='fas fa-user'></i>
+                                Delete Account
+                            </button>
+                        </div>
+                    </>
                 ) : (
                     <>
                         <p>You have not created a profile yet, please create one.</p>
                         <Link className='btn btn-primary my-1' to='/create-profile'>Create Profile</Link>
+                        <div className='my-2' onClick={()=>{deleteProfile()}}>
+                            <button className='btn btn-danger'>
+                                <i className='fas fa-user'></i>
+                                Delete Account
+                            </button>
+                        </div>
                     </>
                 )
             }
@@ -42,5 +58,4 @@ const mapStateToProps = state => ({
 });
 
 
-
-export default connect(mapStateToProps, {getCurrentProfile})(Dashboard);
+export default connect(mapStateToProps, {getCurrentProfile, deleteProfile})(Dashboard);
