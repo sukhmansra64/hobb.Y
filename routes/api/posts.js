@@ -133,7 +133,7 @@ router.put('/like/:id',auth,async (req,res)=>{
 
         await post.save();
 
-        res.status(200).json({msg:'Post Liked.'});
+        res.json(post.likes);
     }catch(err){
         if(err.kind === "ObjectId"){
             return res.status(404).json({msg: 'Post not Found'});
@@ -168,7 +168,7 @@ router.put('/unlike/:id',auth,async (req,res)=>{
 
         await post.save();
 
-        res.status(200).json(post.likes);
+        res.json(post.likes);
     }catch(err){
         if(err.kind === "ObjectId"){
             return res.status(404).json({msg: 'Post not Found'});
