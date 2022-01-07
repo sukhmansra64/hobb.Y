@@ -15,6 +15,8 @@ const initialState = {
     instagram: ''
 };
 
+let count = 0;
+
 
 const EditProfile = ({profile:{profile, loading} ,history,createProfile, getCurrentProfile}) => {
     const [formData, setFormData] = useState(initialState);
@@ -30,23 +32,29 @@ const EditProfile = ({profile:{profile, loading} ,history,createProfile, getCurr
         instagram
     } = formData;
 
-    useEffect(()=>{
-        getCurrentProfile();
+    useEffect(() => {
+        // if there is no profile, attempt to fetch one
+        if (!profile||count===0) getCurrentProfile();
+        count++;
+        // if we finished loading and we do have a profile
+        // then build our profileData
+        if (!loading && profile) {
+            const profileData = { ...initialState };
+            for (const key in profile) {
+                if (key in profileData) profileData[key] = profile[key];
+            }
+            for (const key in profile.links) {
+                if (key in profileData) profileData[key] = profile.links[key];
+            }
+            // the hobbies may be an array from our API response
+            if (Array.isArray(profileData.hobbies))
+                profileData.hobbies = profileData.hobbies.join(', ');
+            // set local state with the profileData
+            setFormData(profileData);
+        }
+    }, [loading, getCurrentProfile, profile]);
 
-        setFormData({
-            work: loading||!profile.work ? '': profile.work,
-            location: loading||!profile.location ? '': profile.location,
-            hobbies: loading||!profile.hobbies ? '': profile.hobbies.join(', '),
-            bio: loading||!profile.bio ? '': profile.bio,
-            twitter: loading||!profile.links.twitter ? '': profile.links.twitter,
-            facebook: loading||!profile.links.facebook ? '': profile.links.facebook,
-            youtube: loading||!profile.links.youtube ? '': profile.links.youtube,
-            instagram: loading||!profile.links.instagram ? '': profile.links.instagram
-        })
-    },[loading])
-
-    const onChange = (e) =>
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+    const onChange = (e) => {setFormData({ ...formData, [e.target.name]: e.target.value })};
 
     const onSubmit = (e) =>{
         e.preventDefault();

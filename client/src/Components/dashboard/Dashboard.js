@@ -15,7 +15,7 @@ Dashboard.propTypes = {
 
 
 function Dashboard({auth:{user}, profile:{profile,loading}, getCurrentProfile, deleteProfile}) {
-    useEffect(()=>{getCurrentProfile()},[]);
+    useEffect(()=>{getCurrentProfile()},[getCurrentProfile]);
     return loading && profile === null ? (
         <Spinner/>
     ) : (

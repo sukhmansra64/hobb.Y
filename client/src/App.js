@@ -14,6 +14,9 @@ import setAuthToken from "./utils/setAuthToken";
 import {loadUser} from "./actions/auth";
 import CreateProfile from "./Components/ProfileForms/CreateProfile";
 import EditProfile from "./Components/ProfileForms/EditProfile";
+import Profiles from "./Components/profiles/Profiles";
+import Profile from "./Components/profile/Profile";
+import Posts from './Components/posts/Posts';
 
 function App() {
     useEffect(()=>{
@@ -34,11 +37,20 @@ function App() {
                           <Route exact path='/login'>
                               <Login/>
                           </Route>
+                          <Route exact path='/profiles'>
+                              <Profiles/>
+                          </Route>
+                          <Route exact path='/profile/user/:id'>
+                              <Profile/>
+                          </Route>
                           <Route exact path='/register'>
                               <Register/>
                           </Route>
                           <Route exact path='/dashboard'>
                             <PrivateRoute component={Dashboard}/>
+                          </Route>
+                          <Route exact path='/posts'>
+                              <PrivateRoute component={Posts}/>
                           </Route>
                           <Route exact path='/create-profile'>
                               <PrivateRoute component={CreateProfile}/>

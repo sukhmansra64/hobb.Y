@@ -9,19 +9,28 @@ const Navbar = ({logout, auth: {isAuthenticated, loading}}) =>{
     const userLinks = () =>{
         return(
             <>
-                <a href='#!' onClick={logout}>
-                    <i className='fas fa-sign-out-alt'></i>
-                    <span className='hide-sm'>logout</span>
-                </a>
+                <ul>
+                    <li><Link to="/profiles">Hobbyists</Link></li>
+                    <li><Link to='/posts'>Posts</Link></li>
+                    <li><Link to='/dashboard'>Dashboard</Link></li>
+                    <li>
+                        <a href='#!' onClick={logout}>
+                            <i className='fas fa-sign-out-alt'></i>
+                            <span className='hide-sm'>logout</span>
+                        </a>
+                    </li>
+                </ul>
             </>
         )
     }
     const guestLinks = () =>{
         return(
             <>
-                <li><Link to="/profiles">Hobbyists</Link></li>
-                <li><Link to="/register">Register</Link></li>
-                <li><Link to="/login">Login</Link></li>
+                <ul>
+                    <li><Link to="/profiles">Hobbyists</Link></li>
+                    <li><Link to="/register">Register</Link></li>
+                    <li><Link to="/login">Login</Link></li>
+                </ul>
             </>
         )
     }

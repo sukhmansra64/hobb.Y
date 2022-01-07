@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const bodyParser = require('body-parser')
+const cors = require('cors');
 
 const app = express();
 
@@ -8,6 +9,7 @@ const PORT = process.env.PORT||8000
 
 //initialize middlewares
 app.use(express.json());
+app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 const auth = require('./middleware/auth');

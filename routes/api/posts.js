@@ -45,7 +45,7 @@ router.post('/',[auth,[check('text','Text is required').not().isEmpty()]], async
     }
 });
 
-//@route GET api/posts
+//@route GET api/posts/all
 //@description get all posts
 //@access private
 

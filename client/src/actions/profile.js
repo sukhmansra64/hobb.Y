@@ -1,16 +1,48 @@
 import {setAlert} from './alert';
-import {ACCOUNT_DELETED, CLEAR_PROFILE, GET_PROFILE, PROFILE_ERROR, SET_ALERT} from "./types";
+import {ACCOUNT_DELETED, CLEAR_PROFILE, GET_PROFILE, GET_PROFILES, PROFILE_ERROR} from "./types";
 import axios from 'axios';
 
 //get profile
 export const getCurrentProfile = () => async dispatch =>{
     try{
         const res = await axios.get("/api/profile/me");
-
         dispatch({
             type: GET_PROFILE,
             payload: res.data
         });
+    }catch(err){
+        dispatch({
+           type: PROFILE_ERROR,
+           payload: {msg: err.response.statusText, status: err.response.status}
+        });
+    }
+}
+
+//get all profiles
+export const getProfiles = () => async dispatch =>{
+    dispatch({type: CLEAR_PROFILE});
+    try{
+        const res = await axios.get('/api/profile/user');
+
+        dispatch({
+            type: GET_PROFILES,
+            payload: res.data
+        });
+    }catch(err){
+        dispatch({
+           type: PROFILE_ERROR,
+           payload:{msg: err.response.statusText, status: err.response.status}
+        });
+    }
+}
+
+//get a user's profile by ID
+export const getProfileByID = userID => async dispatch =>{
+    dispatch({type: CLEAR_PROFILE});
+    try{
+        const res = await axios.get(`/api/profile/user/${userID}`);
+
+        dispatch({type: GET_PROFILE, payload: res.data});
     }catch(err){
         dispatch({
            type: PROFILE_ERROR,
