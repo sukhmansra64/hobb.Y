@@ -66,6 +66,13 @@ function App() {
                   </Switch>
               </>
           </Router>
+          <footer style={{position:"absolute", bottom:0}}>
+              <span className='text-light'>Made by Sukhman Sra</span>
+              <br/>
+              <span><a href='https://www.linkedin.com/in/sukhsra/' target="_blank" rel="noopener noreferrer"><u className='link-light'>LinkedIn</u></a></span>
+              <br/>
+              <span><a href='https://github.com/sukhmansra64' target="_blank" rel="noopener noreferrer"><u className='link-light'>GitHub</u></a></span>
+          </footer>
       </Provider>
   );
 }
