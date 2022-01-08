@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const normalize = require('normalize-url');
+const normalize = import('normalize-url');
 
 
 //@route GET api/user

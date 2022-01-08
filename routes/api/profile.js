@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
-const normalize = require('normalize-url');
+const normalize = import('normalize-url');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
