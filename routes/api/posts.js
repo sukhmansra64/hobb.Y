@@ -185,7 +185,7 @@ router.put('/unlike/:id',auth,async (req,res)=>{
 router.post('/comment/:id',[auth,[check('text','Text is required').not().isEmpty()]], async (req,res)=>{
     const errors = validationResult(req);
     if(!errors.isEmpty()){
-        res.status(400).json({errors: errors.array()});
+        return res.status(400).json({errors: errors.array()});
     }
 
     try{
@@ -206,7 +206,7 @@ router.post('/comment/:id',[auth,[check('text','Text is required').not().isEmpty
         post.comments.unshift(newComment);
         await post.save();
 
-        res.status(200).json(post.comments)
+        return res.status(200).json(post.comments)
     }catch(err){
         if(err.kind === "ObjectId"){
             return res.status(404).json({msg: 'Post not Found'});

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middleware/auth');
+const normalize = require('normalize-url');
 
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
@@ -65,10 +66,10 @@ router.post('/',[
 
     //create links object
     profileFields.links = {};
-    if(youtube) profileFields.links.youtube = youtube;
-    if(twitter) profileFields.links.twitter = twitter;
-    if(facebook) profileFields.links.facebook = facebook;
-    if(instagram) profileFields.links.instagram = instagram;
+    if(youtube) profileFields.links.youtube = normalize(youtube,{forceHttps: true});
+    if(twitter) profileFields.links.twitter = normalize(twitter,{forceHttps: true});
+    if(facebook) profileFields.links.facebook = normalize(facebook,{forceHttps: true});
+    if(instagram) profileFields.links.instagram = normalize(instagram,{forceHttps: true});
 
     try{
         let profile = await Profile.findOne({user: req.user.id});

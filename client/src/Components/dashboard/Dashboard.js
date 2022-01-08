@@ -13,9 +13,11 @@ Dashboard.propTypes = {
     deleteProfile: PropTypes.func.isRequired
 };
 
+let count = 0;
 
 function Dashboard({auth:{user}, profile:{profile,loading}, getCurrentProfile, deleteProfile}) {
-    useEffect(()=>{getCurrentProfile()},[getCurrentProfile]);
+    useEffect(()=>{getCurrentProfile()},[getCurrentProfile,count]);
+    if(count===0&&!profile){count++}
     return loading && profile === null ? (
         <Spinner/>
     ) : (

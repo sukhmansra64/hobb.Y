@@ -35,7 +35,7 @@ const ProfileTop = ({
                     {links.youtube && <a href={links.youtube} target="_blank" rel="noopener noreferrer">
                         <i className="fab fa-youtube fa-2x"></i>
                     </a>}
-                    {links.youtube && <a href={links.instagram} target="_blank" rel="noopener noreferrer">
+                    {links.instagram && <a href={links.instagram} target="_blank" rel="noopener noreferrer">
                         <i className="fab fa-instagram fa-2x"></i>
                     </a>}
                 </div>}

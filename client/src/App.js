@@ -17,6 +17,7 @@ import EditProfile from "./Components/ProfileForms/EditProfile";
 import Profiles from "./Components/profiles/Profiles";
 import Profile from "./Components/profile/Profile";
 import Posts from './Components/posts/Posts';
+import Post from "./Components/post/Post";
 
 function App() {
     useEffect(()=>{
@@ -48,6 +49,9 @@ function App() {
                           </Route>
                           <Route exact path='/dashboard'>
                             <PrivateRoute component={Dashboard}/>
+                          </Route>
+                          <Route exact path='/posts/:id'>
+                              <PrivateRoute component={Post}/>
                           </Route>
                           <Route exact path='/posts'>
                               <PrivateRoute component={Posts}/>

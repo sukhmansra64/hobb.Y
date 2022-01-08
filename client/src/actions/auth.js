@@ -34,16 +34,16 @@ export const loadUser = () => async dispatch =>{
 export const login = (email,password) => async dispatch => {
     try {
         const res = await axios.post('/api/auth', {email, password}, {headers: {'Content-Type': 'application/json'}});
-        dispatch({type: LOGIN_SUCCESS, payload: res.data})
         setAuthToken(res.data.token)
+        dispatch({type: LOGIN_SUCCESS, payload: res.data})
     } catch (err) {
         console.log(err);
         const errors = err.response.data.errors;
         if (errors) {
             errors.forEach(error => dispatch(setAlert(error.msg, 'danger')));
         }
-        dispatch({type: LOGIN_FAIL});
         setAuthToken();
+        dispatch({type: LOGIN_FAIL});
     }
 }
 
