@@ -23,23 +23,20 @@
   "homepage": "https://github.com/sukhmansra64/hobb.Y#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "concurrently": "^6.2.1",
     "config": "^3.3.6",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.12.1",
     "gravatar": "^1.8.1",
     "json-web-token": "^3.2.0",
+    "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.1.0",
     "mongoose": "^5.13.6",
     "nodemon": "^2.0.12",
+    "normalize-url": "6.1.0",
     "react": "^17.0.2",
-    "request": "^2.88.2",
-    "jsonwebtoken": "^8.5.1",
-    "normalize-url": "^7.0.2",
-    "body-parser": "^1.19.0",
-    "cors": "^2.8.5"
-  },
-  "devDependencies": {
-
+    "request": "^2.88.2"
   }
 }
