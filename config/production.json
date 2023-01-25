@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://sukhmansra:AnmolSra26@hobb-y.3cere.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "mongoURI": "mongodb://sukhmansra:AnmolSra26@hobb-y-shard-00-00.3cere.mongodb.net:27017,hobb-y-shard-00-01.3cere.mongodb.net:27017,hobb-y-shard-00-02.3cere.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-cu3j0k-shard-0&authSource=admin&retryWrites=true&w=majority",
   "jwtSecret": "AnmolSra"
 }
