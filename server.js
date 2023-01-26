@@ -1,7 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db');
 const bodyParser = require('body-parser')
-const path = require('path')
+const path = require('path');
 const cors = require('cors');
 
 const app = express();
@@ -30,7 +30,7 @@ app.get('*',(req,res)=>{
         res.sendFile(path.resolve(__dirname,'client,build,index.html'))
 });
 
-const PORT = process.env.PORT||8000
+const PORT = process.env.PORT||8080
 
 app.listen(PORT,()=>{
     console.log(`Server listening on port ${PORT}`)
