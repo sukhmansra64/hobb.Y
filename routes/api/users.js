@@ -5,7 +5,6 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const normalizeUrl = require('normalize-url');
 
 
@@ -28,6 +27,7 @@ router.post('/', [
 ],async (req,res)=>{
     const errors = validationResult(req)
     const {name, email, password} = req.body;
+    const secret = process.env.JWT_SECRET;
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors.array()});
     }
@@ -65,7 +65,7 @@ router.post('/', [
             }
         };
 
-        jwt.sign(payload, config.get('jwtSecret'),{expiresIn: 3600},(err,token)=>{
+        jwt.sign(payload, secret,{expiresIn: 3600},(err,token)=>{
             if (err) throw err;
             res.json({token});
         });

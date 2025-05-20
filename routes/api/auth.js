@@ -3,7 +3,6 @@ const router = express.Router();
 const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const config = require('config');
 const {check, validationResult} = require("express-validator");
 
 const User = require('../../models/User');
@@ -32,6 +31,7 @@ router.post('/',[
     check('password', 'Password is required').exists()
 ], async (req,res)=>{
     const errors = validationResult(req);
+    const secret = process.env.JWT_SECRET;
     if(!errors.isEmpty()){
         return res.status(400).json({errors: errors.array()});
     }
@@ -50,7 +50,7 @@ router.post('/',[
                id:user.id
            }
        }
-       jwt.sign(payload,config.get('jwtSecret'),
+       jwt.sign(payload,secret,
            {expiresIn: 3600}, (err,token)=>{
            if(err) throw err;
            res.status(200).json({token});
