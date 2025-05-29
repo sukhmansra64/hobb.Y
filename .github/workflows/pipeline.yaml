@@ -2,7 +2,7 @@ name: Hobby build → push → deploy
 
 on:
   push:
-    branches: [ masterbranch ]
+    branches: [ main ]
 
 jobs:
   deploy:
