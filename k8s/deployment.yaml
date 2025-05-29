@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hobby
+  namespace: hobby
+spec:
+  replicas: 1
+  selector: { matchLabels: { app: hobby } }
+  template:
+    metadata: { labels: { app: hobby } }
+    spec:
+      containers:
+      - name: hobby
+        image: IMAGE_PLACEHOLDER
+        ports: [ { containerPort: 8080 } ]
+        env:
+        - name: MONGO_URI
+          valueFrom: { secretKeyRef: { name: hobby, key: MONGO_URI } }
+        - name: JWT_SECRET
+          valueFrom: { secretKeyRef: { name: hobby, key: JWT_SECRET } }
+        - name: PORT
+          valueFrom: {configMapRef: {name: hobby, key: PORT}}

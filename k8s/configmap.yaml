@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hobby
+  namespace: hobby
+data:
+  PORT: 8080
