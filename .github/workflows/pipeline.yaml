@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    uses: Sukhman-s-SKube/.github/.github/workflows/build-deploy.yaml@main
+    uses: Sukhman-s-SKube/.github/workflows/build-deploy.yaml@main
     with:
       IMAGE_NAME:    hobby/hobby
       DOCKERFILE_PATH: ./Dockerfile
