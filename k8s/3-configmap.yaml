@@ -4,4 +4,4 @@ metadata:
   name: hobby
   namespace: hobby
 data:
-  PORT: 8080
+  PORT: "8080"
