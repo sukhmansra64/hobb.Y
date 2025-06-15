@@ -19,4 +19,7 @@ spec:
         - name: JWT_SECRET
           valueFrom: { secretKeyRef: { name: hobby, key: JWT_SECRET } }
         - name: PORT
-          valueFrom: {configMapRef: {name: hobby, key: PORT}}
+          valueFrom:
+            configMapKeyRef:
+              name: hobby
+              key: PORT
