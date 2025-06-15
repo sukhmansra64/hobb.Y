@@ -1,4 +1,4 @@
-name: Hobby build → push → deploy
+name: Hobby pipeline
 
 on:
   push:
